@@ -6478,10 +6478,68 @@ Note: the admin UI is implemented as `src/pages/admin/index.astro`, not `public/
     <meta name="robots" content="noindex" />
     <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
     <title>Hello Money Clarity Admin</title>
+    <style is:inline>
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        background: #f3f5fa;
+      }
+
+      body[data-admin-login='true'] {
+        background: #f3f5fa;
+      }
+
+      body[data-admin-login='true'] img[src='/favicon.svg'],
+      body[data-admin-login='true'] img[src$='/favicon.svg'] {
+        width: 190px !important;
+        height: 190px !important;
+        max-width: 42vw !important;
+        max-height: 42vw !important;
+        border-radius: 34px !important;
+        object-fit: contain !important;
+      }
+
+      body[data-admin-login='true'] button {
+        border-radius: 4px !important;
+        background: #51545c !important;
+        color: #ffffff !important;
+        box-shadow: 0 6px 14px rgba(30, 38, 48, 0.18) !important;
+        font-weight: 700 !important;
+      }
+
+      body[data-admin-login='true'] a[href='/'],
+      body[data-admin-login='true'] a[href='/admin/'],
+      body[data-admin-login='true'] a[href='../'] {
+        color: #6f7b8d !important;
+        font-weight: 700 !important;
+        text-decoration: none !important;
+      }
+
+      @media (max-width: 640px) {
+        body[data-admin-login='true'] img[src='/favicon.svg'],
+        body[data-admin-login='true'] img[src$='/favicon.svg'] {
+          width: 150px !important;
+          height: 150px !important;
+          border-radius: 28px !important;
+        }
+      }
+    </style>
   </head>
   <body>
     <script is:inline>
       window.CMS_MANUAL_INIT = true;
+
+      window.syncAdminLoginState = function() {
+        var text = document.body ? document.body.innerText : '';
+        var isLoginScreen = text.indexOf('Login with') !== -1 && text.indexOf('Go back to site') !== -1;
+        document.body.toggleAttribute('data-admin-login', isLoginScreen);
+      };
+
+      new MutationObserver(function() {
+        window.syncAdminLoginState();
+      }).observe(document.documentElement, { childList: true, subtree: true });
+
       window.initDecap = function() {
         var cms = window.CMS;
 
@@ -6524,6 +6582,7 @@ Note: the admin UI is implemented as `src/pages/admin/index.astro`, not `public/
         });
 
         cms.init();
+        window.syncAdminLoginState();
       };
     </script>
     <script is:inline src="https://unpkg.com/decap-cms@3.14.1/dist/decap-cms.js" onload="window.initDecap()"></script>
