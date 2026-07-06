@@ -5255,7 +5255,6 @@ Excludes `node_modules` and `.git`. Includes generated/local folders that curren
     - blog/
       - [slug].astro
       - index.astro
-    - config.yml.ts
     - contact.astro
     - index.astro
 - tsconfig.json
@@ -6479,6 +6478,7 @@ Note: the admin UI is implemented as `src/pages/admin/index.astro`, not `public/
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
+    <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
     <title>Hello Money Clarity Admin</title>
   </head>
   <body>
@@ -6553,7 +6553,7 @@ Current token values actually implemented include:
 
 ## 8. Deviations From Original Spec
 
-- The original reference structure expected `public/admin/index.html`; this implementation uses `src/pages/admin/index.astro` for the admin page and serves the CMS config through `src/pages/config.yml.ts` as `/config.yml`.
+- The original reference structure expected `public/admin/index.html`; this implementation uses `src/pages/admin/index.astro` for the admin page and loads the static Decap config from `/admin/config.yml`.
 - Admin authentication is not fully configured for production. The repository now points to `gaidi1amine/hello-money-clarity`, but no real DecapBridge/GitHub OAuth bridge is active.
 - The original spec requested DecapBridge or GitHub OAuth invite-only auth. Local editing currently works through `local_backend` plus the Decap proxy, but production login remains incomplete.
 - The color palette request said not to introduce additional brand colors; the implementation uses teal/gold/white plus neutral support colors (`cream`, `ink`, `muted`, `border`) for readability and layout.
@@ -6602,7 +6602,7 @@ Left to make production auth functional:
 - The user requested removal of the newer visual/live editor. It has been removed; only the classic Decap admin remains.
 - The admin link currently available locally is `http://127.0.0.1:4322/admin/#/`.
 - The user-facing local site URL is `http://127.0.0.1:4322/`.
-- `src/pages/config.yml.ts` exists to expose `public/admin/config.yml` at `/config.yml` for the Astro-based admin page.
+- `public/admin/config.yml` is served as a static asset at `/admin/config.yml`; the former generated `/config.yml` route has been removed.
 - The repository contains generated `dist` output from a successful local build.
 - The most recent local `npm run build` completed successfully on 2026-07-06.
 - The project uses MDX for blog posts so CTA components can be embedded in body content.
