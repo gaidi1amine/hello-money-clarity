@@ -6351,13 +6351,11 @@ local_backend:
   url: http://localhost:8081/api/v1
 
 backend:
-  name: github
-  repo: gaidi1amine/hello-money-clarity
+  name: git-gateway
+  repo: gaidilamine/hello-money-clarity
   branch: main
-  # To enable real GitHub login on the deployed site, replace the repo above
-  # and add a real OAuth bridge, for example:
-  # base_url: https://your-real-oauth-bridge.example.com
-  # auth_endpoint: auth
+  base_url: https://auth.decapbridge.com
+  auth_endpoint: /sites/5040a8d3-a6ca-4aed-927c-41c551e441dc/pkce
 
 site_url: https://hello-money-clarity.pages.dev
 display_url: https://hello-money-clarity.pages.dev
@@ -6554,7 +6552,7 @@ Current token values actually implemented include:
 ## 8. Deviations From Original Spec
 
 - The original reference structure expected `public/admin/index.html`; this implementation uses `src/pages/admin/index.astro` for the admin page and loads the static Decap config from `/admin/config.yml`.
-- Admin authentication is not fully configured for production. The repository now points to `gaidi1amine/hello-money-clarity`, but no real DecapBridge/GitHub OAuth bridge is active.
+- Admin authentication is configured for DecapBridge/Git Gateway in `public/admin/config.yml`, but live login still needs to be tested after deployment.
 - The original spec requested DecapBridge or GitHub OAuth invite-only auth. Local editing currently works through `local_backend` plus the Decap proxy, but production login remains incomplete.
 - The color palette request said not to introduce additional brand colors; the implementation uses teal/gold/white plus neutral support colors (`cream`, `ink`, `muted`, `border`) for readability and layout.
 - No sitemap is configured, even though the spec requested basic SEO and social sharing support.
@@ -6567,7 +6565,7 @@ Current token values actually implemented include:
 
 ## 9. Known Issues, Bugs, Or Incomplete Features
 
-- Production Decap CMS authentication is incomplete until the real GitHub repo and real OAuth bridge are configured.
+- Production Decap CMS authentication now has DecapBridge/Git Gateway values configured, but the deployed login flow is not yet verified from this workspace.
 - `publish_mode: editorial_workflow` is enabled, but Decap local backend documentation notes editorial workflow is not supported locally.
 - `hello-money-clarity.pages.dev` did not resolve during the current check, so the live site may not be deployed, may have a different Pages URL, or DNS may not be ready.
 - No custom 404 page.

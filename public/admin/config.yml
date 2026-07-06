@@ -2,13 +2,11 @@ local_backend:
   url: http://localhost:8081/api/v1
 
 backend:
-  name: github
-  repo: gaidi1amine/hello-money-clarity
+  name: git-gateway
+  repo: gaidilamine/hello-money-clarity
   branch: main
-  # To enable real GitHub login on the deployed site, replace the repo above
-  # and add a real OAuth bridge, for example:
-  # base_url: https://your-real-oauth-bridge.example.com
-  # auth_endpoint: auth
+  base_url: https://auth.decapbridge.com
+  auth_endpoint: /sites/5040a8d3-a6ca-4aed-927c-41c551e441dc/pkce
 
 site_url: https://hello-money-clarity.pages.dev
 display_url: https://hello-money-clarity.pages.dev
