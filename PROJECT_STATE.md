@@ -5688,7 +5688,12 @@ Custom domain: no custom domain is configured in repository files; DNS verificat
 
 ## 20. Git Status
 
-Git repository initialized locally for `https://github.com/gaidi1amine/hello-money-clarity.git`. Current branch: `main`. Uncommitted changes at snapshot time: the project files are being prepared for the initial commit. Last 5 commit messages: none yet before the initial commit.
+Git repository initialized locally for `https://github.com/gaidi1amine/hello-money-clarity.git`. Current branch: `main`, tracking `origin/main`. Uncommitted changes at snapshot time: only this `PROJECT_STATE.md` Git-status correction before the follow-up commit.
+
+Last 5 commit messages at snapshot time:
+- `be25894 Merge remote starter commit`
+- `8f6a744 Initial Hello Money Clarity site`
+- `7befc90 Initial commit`
 
 ## 21. Custom Domain And DNS Status
 
