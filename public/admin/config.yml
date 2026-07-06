@@ -1,0 +1,113 @@
+local_backend:
+  url: http://localhost:8081/api/v1
+
+backend:
+  name: github
+  repo: gaidi1amine/hello-money-clarity
+  branch: main
+  # To enable real GitHub login on the deployed site, replace the repo above
+  # and add a real OAuth bridge, for example:
+  # base_url: https://your-real-oauth-bridge.example.com
+  # auth_endpoint: auth
+
+site_url: https://hello-money-clarity.pages.dev
+display_url: https://hello-money-clarity.pages.dev
+logo_url: /favicon.svg
+
+media_folder: src/assets/blog
+public_folder: ../../assets/blog
+
+publish_mode: editorial_workflow
+
+editor:
+  preview: true
+
+collections:
+  - name: blog
+    label: Blog Posts
+    label_singular: Blog Post
+    folder: src/content/blog
+    create: true
+    extension: mdx
+    format: frontmatter
+    slug: "{{slug}}"
+    preview_path: blog/{{slug}}
+    summary: "{{title}} - {{publishDate}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string, hint: "Lowercase words separated by hyphens." }
+      - { label: Publish Date, name: publishDate, widget: datetime, date_format: "YYYY-MM-DD", time_format: false }
+      - { label: Featured Image, name: featuredImage, widget: image }
+      - { label: Featured Image Alt Text, name: featuredImageAlt, widget: string }
+      - { label: Short Excerpt, name: description, widget: text, hint: "Shown on cards and used as the default SEO description." }
+      - { label: Featured on Homepage, name: featured, widget: boolean, default: false }
+      - { label: Homepage Order, name: featuredOrder, widget: number, default: 999, value_type: int, min: 1, hint: "Lower numbers appear first when the post is featured." }
+      - { label: Categories/Tags, name: tags, widget: list, required: false, field: { label: Tag, name: tag, widget: string } }
+      - { label: SEO Meta Description, name: metaDescription, widget: text, required: false }
+      - { label: Social Share Image, name: socialImage, widget: image, required: false }
+      - label: Body
+        name: body
+        widget: markdown
+        buttons: [bold, italic, heading-one, heading-two, heading-three, heading-four, quote, bulleted-list, numbered-list, link]
+        editor_components: [image, cta-button]
+
+  - name: settings
+    label: Site Settings
+    files:
+      - name: home
+        label: Homepage
+        file: src/content/settings/home.md
+        fields:
+          - { label: Hero Headline, name: heroHeadline, widget: string }
+          - { label: Hero Subheading, name: heroSubheading, widget: text }
+          - { label: CTA Text, name: ctaText, widget: string }
+          - { label: CTA Link, name: ctaLink, widget: string }
+          - label: Featured Posts
+            name: featuredPosts
+            widget: list
+            hint: "Enter post slugs in the exact order they should appear."
+            field: { label: Blog Post Slug, name: slug, widget: string }
+          - label: Brand Intro Strip
+            name: body
+            widget: markdown
+            buttons: [bold, italic, link]
+            editor_components: [button-link]
+
+      - name: about
+        label: About Page
+        file: src/content/settings/about.md
+        fields:
+          - { label: Page Title, name: title, widget: string }
+          - label: Body
+            name: body
+            widget: markdown
+            buttons: [bold, italic, heading-two, heading-three, quote, bulleted-list, numbered-list, link]
+            editor_components: [button-link]
+
+      - name: contact
+        label: Contact Page
+        file: src/content/settings/contact.md
+        fields:
+          - { label: Page Title, name: title, widget: string }
+          - label: Body
+            name: body
+            widget: markdown
+            buttons: [bold, italic, heading-two, heading-three, quote, bulleted-list, numbered-list, link]
+            editor_components: [button-link]
+
+      - name: site
+        label: Global Site Text
+        file: src/content/settings/site.md
+        fields:
+          - { label: Site Title, name: title, widget: string }
+          - { label: Site Description, name: description, widget: text }
+          - { label: Contact Email, name: contactEmail, widget: string }
+          - { label: Pinterest URL, name: pinterestUrl, widget: string, required: false }
+          - { label: Affiliate Disclaimer, name: affiliateDisclaimer, widget: text }
+          - { label: Footer Text, name: footerText, widget: string }
+          - label: Footer Links
+            name: footerLinks
+            widget: list
+            fields:
+              - { label: Label, name: label, widget: string }
+              - { label: URL, name: href, widget: string }

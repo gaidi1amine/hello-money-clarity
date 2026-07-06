@@ -1,0 +1,51 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const site = await getEntry('settings', 'site');
+const contact = await getEntry('settings', 'contact');
+const email = site?.data.contactEmail ?? 'HelloMoneyClarity@gmail.com';
+const pinterestUrl = site?.data.pinterestUrl ?? '#';
+const { Content } = await contact!.render();
+---
+
+<BaseLayout title="Contact" description="Contact Hello Money Clarity by email.">
+  <section class="section contact-page">
+    <div class="container contact-inner">
+      <h1>{contact?.data.title ?? 'Contact'}</h1>
+      <div class="prose">
+        <Content />
+      </div>
+      <div class="contact-links">
+        <a class="button" href={`mailto:${email}`}>{email}</a>
+        <a href={pinterestUrl}>Pinterest</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-page {
+    min-height: 55vh;
+    display: grid;
+    align-items: center;
+  }
+
+  .contact-inner {
+    display: grid;
+    gap: 1rem;
+    max-width: 760px;
+  }
+
+  .contact-inner :global(p) {
+    margin: 0;
+    font-size: clamp(1.1rem, 1rem + 0.45vw, 1.3rem);
+  }
+
+  .contact-links {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+</style>

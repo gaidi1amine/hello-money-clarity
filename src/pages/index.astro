@@ -1,0 +1,114 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection, getEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const home = await getEntry('settings', 'home');
+const posts = await getCollection('blog', ({ data }) => !data.draft);
+const selectedSlugs = home?.data.featuredPosts ?? [];
+const selectedPosts = selectedSlugs
+  .map((slug) => posts.find((post) => post.slug === slug || post.data.slug === slug))
+  .filter(Boolean);
+const fallbackFeatured = posts
+  .filter((post) => post.data.featured)
+  .sort((a, b) => a.data.featuredOrder - b.data.featuredOrder || b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+const featuredPosts = (selectedPosts.length ? selectedPosts : fallbackFeatured).slice(0, 3);
+const { Content: HomeIntro } = await home!.render();
+---
+
+<BaseLayout>
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <h1>{home?.data.heroHeadline}</h1>
+        <p>{home?.data.heroSubheading}</p>
+        <a class="button" href={home?.data.ctaLink}>{home?.data.ctaText}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Featured Reads</h2>
+        <p>Hand-picked guides for making money feel clearer, one practical step at a time.</p>
+      </div>
+      <div class="card-grid">
+        {featuredPosts.map((post) => (
+          <article class="post-card">
+            <a href={`/blog/${post.slug}`} aria-label={`Read ${post.data.title}`}>
+              <Image src={post.data.featuredImage} alt={post.data.featuredImageAlt} widths={[360, 520, 720]} sizes="(min-width: 720px) 33vw, 100vw" />
+            </a>
+            <div class="post-card-content">
+              <h3><a href={`/blog/${post.slug}`}>{post.data.title}</a></h3>
+              <p>{post.data.description}</p>
+              <a class="read-more" href={`/blog/${post.slug}`}>Read more</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="intro-strip">
+    <div class="container intro-inner">
+      <div class="prose">
+        <HomeIntro />
+      </div>
+      <a href="/about">About Hello Money Clarity</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    background: var(--color-teal);
+    color: var(--color-white);
+  }
+
+  .hero-inner {
+    min-height: clamp(440px, 74vh, 720px);
+    display: grid;
+    align-items: center;
+    padding-block: 4rem;
+  }
+
+  .hero-copy {
+    display: grid;
+    gap: 1.1rem;
+    max-width: 780px;
+  }
+
+  .hero h1,
+  .hero p {
+    color: var(--color-white);
+  }
+
+  .hero p {
+    max-width: 660px;
+    margin: 0;
+    font-size: clamp(1.12rem, 1rem + 0.6vw, 1.45rem);
+  }
+
+  .intro-strip {
+    padding-block: 2.2rem;
+    background: var(--color-soft);
+    border-block: 1px solid var(--color-line);
+  }
+
+  .intro-inner {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .intro-inner a {
+    font-weight: 800;
+  }
+
+  @media (min-width: 820px) {
+    .intro-inner {
+      grid-template-columns: 1fr auto;
+      align-items: center;
+    }
+  }
+</style>

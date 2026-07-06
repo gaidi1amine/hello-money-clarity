@@ -1,0 +1,16 @@
+---
+import { getCollection } from 'astro:content';
+import BlogLayout from '@/layouts/BlogLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content, remarkPluginFrontmatter } = await post.render();
+const wordCount = (remarkPluginFrontmatter?.minutes ? Math.round(remarkPluginFrontmatter.minutes * 200) : post.body.split(/\s+/).length);
+const readTime = `${Math.max(1, Math.ceil(wordCount / 200))} min read`;
+---
+
+<BlogLayout post={post} Content={Content} readTime={readTime} />

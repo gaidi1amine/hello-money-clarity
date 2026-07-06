@@ -1,0 +1,32 @@
+---
+import { getEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const about = await getEntry('settings', 'about');
+const { Content } = await about!.render();
+---
+
+<BaseLayout title="About" description="Learn why Hello Money Clarity exists and what readers can expect from the site.">
+  <section class="section page-header">
+    <div class="container">
+      <h1>{about?.data.title}</h1>
+    </div>
+  </section>
+  <section class="section page-content">
+    <div class="container prose">
+      <Content />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-bottom: 1rem;
+    background: var(--color-soft);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .page-content {
+    padding-top: 2rem;
+  }
+</style>

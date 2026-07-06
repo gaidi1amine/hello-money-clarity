@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Hello Money Clarity">
+  <rect width="64" height="64" rx="14" fill="#0F4C4C"/>
+  <path d="M18 34c0-8 5-14 13-14 5 0 9 2 12 6l-6 5c-2-3-4-4-7-4-4 0-7 3-7 7s3 7 7 7c4 0 8-3 15-13l6 4c-8 12-14 17-22 17-7 0-11-5-11-15z" fill="#FFFFFF"/>
+  <path d="M27 35l7 7 14-18" fill="none" stroke="#D4A93C" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

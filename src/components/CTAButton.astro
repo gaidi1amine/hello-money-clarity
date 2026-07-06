@@ -1,0 +1,11 @@
+---
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
+---
+
+<a class="cta-button" href={href} rel={href.startsWith('http') ? 'sponsored noopener noreferrer' : undefined}>
+  <slot />
+</a>

@@ -1,0 +1,86 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CTAButton from '@/components/CTAButton.astro';
+import { getEntry } from 'astro:content';
+
+interface Props {
+  post: any;
+  Content: any;
+  readTime: string;
+}
+
+const { post, Content, readTime } = Astro.props;
+const site = await getEntry('settings', 'site');
+const disclaimer = site?.data.affiliateDisclaimer;
+const description = post.data.metaDescription ?? post.data.description;
+const image = post.data.socialImage?.src ?? post.data.featuredImage.src;
+---
+
+<BaseLayout title={post.data.title} description={description} image={image}>
+  <article class="post-page">
+    <header class="container post-hero">
+      <div class="post-kicker">{post.data.author} / {readTime}</div>
+      <h1>{post.data.title}</h1>
+      <p>{post.data.description}</p>
+      <div class="post-meta">
+        <time datetime={post.data.publishDate.toISOString()}>{post.data.publishDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</time>
+      </div>
+      <Image src={post.data.featuredImage} alt={post.data.featuredImageAlt} widths={[640, 960, 1280]} sizes="(min-width: 960px) 960px, 100vw" loading="eager" />
+    </header>
+    <div class="container post-body">
+      {disclaimer && <aside class="affiliate-note">{disclaimer}</aside>}
+      <div class="prose">
+        <Content components={{ CTAButton }} />
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .post-page {
+    padding-bottom: clamp(3rem, 7vw, 6rem);
+  }
+
+  .post-hero {
+    display: grid;
+    gap: 1rem;
+    padding-block: clamp(2.4rem, 7vw, 5rem) 1.5rem;
+  }
+
+  .post-hero p {
+    max-width: 720px;
+    margin: 0;
+    font-size: clamp(1.1rem, 1rem + 0.5vw, 1.35rem);
+  }
+
+  .post-kicker {
+    color: var(--color-gold);
+    font-size: 0.92rem;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .post-hero img {
+    width: 100%;
+    max-height: 560px;
+    object-fit: cover;
+    border-radius: var(--radius);
+    border: 1px solid var(--color-line);
+  }
+
+  .post-body {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .affiliate-note {
+    width: min(100%, 760px);
+    padding: 0.9rem 1rem;
+    border: 1px solid rgba(212, 169, 60, 0.42);
+    border-radius: var(--radius);
+    background: #fffaf0;
+    color: var(--color-muted);
+    font-size: 0.95rem;
+  }
+</style>
