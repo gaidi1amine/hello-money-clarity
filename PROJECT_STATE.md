@@ -6526,7 +6526,7 @@ Note: the admin UI is implemented as `src/pages/admin/index.astro`, not `public/
         cms.init();
       };
     </script>
-    <script is:inline src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js" onload="window.initDecap()"></script>
+    <script is:inline src="https://unpkg.com/decap-cms@3.14.1/dist/decap-cms.js" onload="window.initDecap()"></script>
   </body>
 </html>
 ````
