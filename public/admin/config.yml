@@ -5,8 +5,11 @@ backend:
   name: git-gateway
   repo: gaidilamine/hello-money-clarity
   branch: main
+  auth_type: pkce
   base_url: https://auth.decapbridge.com
   auth_endpoint: /sites/5040a8d3-a6ca-4aed-927c-41c551e441dc/pkce
+  auth_token_endpoint: /sites/5040a8d3-a6ca-4aed-927c-41c551e441dc/token
+  gateway_url: https://gateway.decapbridge.com
 
 site_url: https://hello-money-clarity.pages.dev
 display_url: https://hello-money-clarity.pages.dev

@@ -23,11 +23,11 @@
 
       body[data-admin-login='true'] img[src='/favicon.svg'],
       body[data-admin-login='true'] img[src$='/favicon.svg'] {
-        width: 190px !important;
-        height: 190px !important;
+        width: 150px !important;
+        height: 150px !important;
         max-width: 42vw !important;
         max-height: 42vw !important;
-        border-radius: 34px !important;
+        border-radius: 28px !important;
         object-fit: contain !important;
       }
 
@@ -50,9 +50,9 @@
       @media (max-width: 640px) {
         body[data-admin-login='true'] img[src='/favicon.svg'],
         body[data-admin-login='true'] img[src$='/favicon.svg'] {
-          width: 150px !important;
-          height: 150px !important;
-          border-radius: 28px !important;
+          width: 128px !important;
+          height: 128px !important;
+          border-radius: 24px !important;
         }
       }
     </style>
@@ -63,7 +63,8 @@
 
       window.syncAdminLoginState = function() {
         var text = document.body ? document.body.innerText : '';
-        var isLoginScreen = text.indexOf('Login with') !== -1 && text.indexOf('Go back to site') !== -1;
+        var hasLoginControl = text.indexOf('Login with') !== -1 || text.indexOf('Login') !== -1;
+        var isLoginScreen = hasLoginControl && text.indexOf('Go back to site') !== -1;
         document.body.toggleAttribute('data-admin-login', isLoginScreen);
       };
 

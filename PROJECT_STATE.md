@@ -6354,8 +6354,11 @@ backend:
   name: git-gateway
   repo: gaidilamine/hello-money-clarity
   branch: main
+  auth_type: pkce
   base_url: https://auth.decapbridge.com
   auth_endpoint: /sites/5040a8d3-a6ca-4aed-927c-41c551e441dc/pkce
+  auth_token_endpoint: /sites/5040a8d3-a6ca-4aed-927c-41c551e441dc/token
+  gateway_url: https://gateway.decapbridge.com
 
 site_url: https://hello-money-clarity.pages.dev
 display_url: https://hello-money-clarity.pages.dev
@@ -6492,11 +6495,11 @@ Note: the admin UI is implemented as `src/pages/admin/index.astro`, not `public/
 
       body[data-admin-login='true'] img[src='/favicon.svg'],
       body[data-admin-login='true'] img[src$='/favicon.svg'] {
-        width: 190px !important;
-        height: 190px !important;
+        width: 150px !important;
+        height: 150px !important;
         max-width: 42vw !important;
         max-height: 42vw !important;
-        border-radius: 34px !important;
+        border-radius: 28px !important;
         object-fit: contain !important;
       }
 
@@ -6519,9 +6522,9 @@ Note: the admin UI is implemented as `src/pages/admin/index.astro`, not `public/
       @media (max-width: 640px) {
         body[data-admin-login='true'] img[src='/favicon.svg'],
         body[data-admin-login='true'] img[src$='/favicon.svg'] {
-          width: 150px !important;
-          height: 150px !important;
-          border-radius: 28px !important;
+          width: 128px !important;
+          height: 128px !important;
+          border-radius: 24px !important;
         }
       }
     </style>
@@ -6532,7 +6535,8 @@ Note: the admin UI is implemented as `src/pages/admin/index.astro`, not `public/
 
       window.syncAdminLoginState = function() {
         var text = document.body ? document.body.innerText : '';
-        var isLoginScreen = text.indexOf('Login with') !== -1 && text.indexOf('Go back to site') !== -1;
+        var hasLoginControl = text.indexOf('Login with') !== -1 || text.indexOf('Login') !== -1;
+        var isLoginScreen = hasLoginControl && text.indexOf('Go back to site') !== -1;
         document.body.toggleAttribute('data-admin-login', isLoginScreen);
       };
 
