@@ -278,6 +278,19 @@ const ogImage = Astro.props.image ? new URL(Astro.props.image, Astro.site ?? Ast
     box-shadow: var(--shadow-soft);
   }
 
+  .post-card > a:first-child {
+    display: block;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--color-soft);
+  }
+
+  .post-card > a:first-child img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
   .post-card-content {
     display: grid;
     gap: 0.7rem;
