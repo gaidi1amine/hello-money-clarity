@@ -6398,6 +6398,8 @@ collections:
       - label: Body
         name: body
         widget: markdown
+        required: false
+        default: ""
         buttons: [bold, italic, heading-one, heading-two, heading-three, heading-four, quote, bulleted-list, numbered-list, link]
         editor_components: [image, cta-button]
 
