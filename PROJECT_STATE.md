@@ -6545,43 +6545,59 @@ Note: the admin UI is implemented as `src/pages/admin/index.astro`, not `public/
 
       window.initDecap = function() {
         var cms = window.CMS;
+        var buttonPattern = /^(?:<CTAButton href="([^"]+)">([\s\S]*?)<\/CTAButton>|<a class="button-link" href="([^"]+)">([\s\S]*?)<\/a>)$/;
+
+        function escapeHtml(value) {
+          return String(value || '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+        }
+
+        function buttonFromMatch(match) {
+          return { href: match[1] || match[3] || '', text: match[2] || match[4] || '' };
+        }
+
+        function buttonToBlock(data) {
+          var href = String(data.href || '').trim();
+          var text = String(data.text || '').trim();
+          if (!href || !text) {
+            return '';
+          }
+
+          return '<a class="button-link" href="' + escapeHtml(href) + '">' + escapeHtml(text) + '</a>';
+        }
+
+        function buttonToPreview(data) {
+          var text = escapeHtml(data.text || 'Button');
+          return '<a style="display:inline-block;padding:12px 18px;border-radius:8px;background:#D4A93C;color:#123737;font-weight:800;text-decoration:none;">' + text + '</a>';
+        }
 
         cms.registerEditorComponent({
           id: 'cta-button',
           label: 'CTA Button',
           fields: [
-            { name: 'text', label: 'Button Text', widget: 'string' },
-            { name: 'href', label: 'URL', widget: 'string' }
+            { name: 'text', label: 'Button Text', widget: 'string', required: false, default: '' },
+            { name: 'href', label: 'URL', widget: 'string', required: false, default: '' }
           ],
-          pattern: /^<CTAButton href="([^"]+)">([\s\S]*?)<\/CTAButton>$/,
-          fromBlock: function(match) {
-            return { href: match[1], text: match[2] };
-          },
-          toBlock: function(data) {
-            return '<CTAButton href="' + data.href + '">' + data.text + '</CTAButton>';
-          },
-          toPreview: function(data) {
-            return '<a style="display:inline-block;padding:12px 18px;border-radius:8px;background:#D4A93C;color:#123737;font-weight:800;text-decoration:none;">' + data.text + '</a>';
-          }
+          pattern: buttonPattern,
+          fromBlock: buttonFromMatch,
+          toBlock: buttonToBlock,
+          toPreview: buttonToPreview
         });
 
         cms.registerEditorComponent({
           id: 'button-link',
           label: 'Button Link',
           fields: [
-            { name: 'text', label: 'Button Text', widget: 'string' },
-            { name: 'href', label: 'URL', widget: 'string' }
+            { name: 'text', label: 'Button Text', widget: 'string', required: false, default: '' },
+            { name: 'href', label: 'URL', widget: 'string', required: false, default: '' }
           ],
-          pattern: /^<a class="button-link" href="([^"]+)">([\s\S]*?)<\/a>$/,
-          fromBlock: function(match) {
-            return { href: match[1], text: match[2] };
-          },
-          toBlock: function(data) {
-            return '<a class="button-link" href="' + data.href + '">' + data.text + '</a>';
-          },
-          toPreview: function(data) {
-            return '<a style="display:inline-block;padding:12px 18px;border-radius:8px;background:#D4A93C;color:#123737;font-weight:800;text-decoration:none;">' + data.text + '</a>';
-          }
+          pattern: buttonPattern,
+          fromBlock: buttonFromMatch,
+          toBlock: buttonToBlock,
+          toPreview: buttonToPreview
         });
 
         cms.init();
