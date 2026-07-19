@@ -18,8 +18,6 @@ logo_url: /favicon.svg
 media_folder: src/assets/blog
 public_folder: ../../assets/blog
 
-publish_mode: editorial_workflow
-
 editor:
   preview: true
 
@@ -50,7 +48,7 @@ collections:
         name: body
         widget: markdown
         required: false
-        default: ""
+        modes: [raw]
         buttons: [bold, italic, heading-one, heading-two, heading-three, heading-four, quote, bulleted-list, numbered-list, link]
         editor_components: [image, cta-button]
 

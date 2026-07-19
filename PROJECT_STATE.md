@@ -6367,8 +6367,6 @@ logo_url: /favicon.svg
 media_folder: src/assets/blog
 public_folder: ../../assets/blog
 
-publish_mode: editorial_workflow
-
 editor:
   preview: true
 
@@ -6399,7 +6397,7 @@ collections:
         name: body
         widget: markdown
         required: false
-        default: ""
+        modes: [raw]
         buttons: [bold, italic, heading-one, heading-two, heading-three, heading-four, quote, bulleted-list, numbered-list, link]
         editor_components: [image, cta-button]
 
@@ -6620,9 +6618,9 @@ Current token values actually implemented include:
 - Admin authentication is configured for DecapBridge/Git Gateway in `public/admin/config.yml`, but live login still needs to be tested after deployment.
 - The original spec requested DecapBridge or GitHub OAuth invite-only auth. Local editing currently works through `local_backend` plus the Decap proxy, but production login remains incomplete.
 - The color palette request said not to introduce additional brand colors; the implementation uses teal/gold/white plus neutral support colors (`cream`, `ink`, `muted`, `border`) for readability and layout.
-- No sitemap is configured, even though the spec requested basic SEO and social sharing support.
-- No `robots.txt` is configured.
-- No custom 404 page exists.
+- Sitemap support is configured with `@astrojs/sitemap`.
+- `public/robots.txt` is configured.
+- A custom 404 page exists at `src/pages/404.astro`.
 - Contact page has email and Pinterest link only; no contact form, which matches the no-backend requirement.
 - A custom visual/live editor was experimented with earlier but has been removed; only the classic Decap admin method remains.
 - The implementation adds custom Decap editor components for CTA/button-like links (`cta-button` and `button-link`), which supports the user-requested button-link appearance.
@@ -6631,11 +6629,8 @@ Current token values actually implemented include:
 ## 9. Known Issues, Bugs, Or Incomplete Features
 
 - Production Decap CMS authentication now has DecapBridge/Git Gateway values configured, but the deployed login flow is not yet verified from this workspace.
-- `publish_mode: editorial_workflow` is enabled, but Decap local backend documentation notes editorial workflow is not supported locally.
+- Decap `publish_mode: editorial_workflow` has been removed so saves go directly through the configured backend instead of hidden draft branches.
 - `hello-money-clarity.pages.dev` did not resolve during the current check, so the live site may not be deployed, may have a different Pages URL, or DNS may not be ready.
-- No custom 404 page.
-- No sitemap.
-- No robots.txt.
 - No Cloudflare-specific headers or redirects are configured.
 - Git metadata is unusable from this workspace despite a `.git` folder being present.
 
