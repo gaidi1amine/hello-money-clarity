@@ -6249,7 +6249,8 @@ const blog = defineCollection({
       metaDescription: z.string().optional(),
       socialImage: image().optional(),
       author: z.string().default('Hello Money Clarity'),
-      draft: z.boolean().default(false)
+      draft: z.boolean().default(false),
+      allowEmptyBody: z.boolean().optional()
     })
 });
 
@@ -6393,9 +6394,10 @@ collections:
       - { label: Categories/Tags, name: tags, widget: list, required: false, field: { label: Tag, name: tag, widget: string } }
       - { label: SEO Meta Description, name: metaDescription, widget: text, required: false }
       - { label: Social Share Image, name: socialImage, widget: image, required: false }
+      - { label: Allow Empty Body, name: allowEmptyBody, widget: boolean, default: false, required: false, hint: "Only turn this on if you intentionally want to save a post with no body." }
       - label: Body
         name: body
-        widget: markdown
+        widget: richtext
         required: false
         buttons: [bold, italic, heading-one, heading-two, heading-three, heading-four, quote, bulleted-list, numbered-list, link]
         editor_components: [image, cta-button]
@@ -6418,7 +6420,7 @@ collections:
             field: { label: Blog Post Slug, name: slug, widget: string }
           - label: Brand Intro Strip
             name: body
-            widget: markdown
+            widget: richtext
             buttons: [bold, italic, link]
             editor_components: [button-link]
 
@@ -6429,7 +6431,7 @@ collections:
           - { label: Page Title, name: title, widget: string }
           - label: Body
             name: body
-            widget: markdown
+            widget: richtext
             buttons: [bold, italic, heading-two, heading-three, quote, bulleted-list, numbered-list, link]
             editor_components: [button-link]
 
@@ -6440,7 +6442,7 @@ collections:
           - { label: Page Title, name: title, widget: string }
           - label: Body
             name: body
-            widget: markdown
+            widget: richtext
             buttons: [bold, italic, heading-two, heading-three, quote, bulleted-list, numbered-list, link]
             editor_components: [button-link]
 
@@ -6598,6 +6600,35 @@ Note: the admin UI is implemented as `src/pages/admin/index.astro`, not `public/
           fromBlock: buttonFromMatch,
           toBlock: buttonToBlock,
           toPreview: buttonToPreview
+        });
+
+        cms.registerEventListener({
+          name: 'preSave',
+          handler: function({ entry }) {
+            var data = entry.get('data');
+            var path = entry.get('path') || '';
+            var collection = entry.get('collection') || '';
+            var isBlogPost =
+              collection === 'blog' ||
+              path.indexOf('src/content/blog/') === 0 ||
+              Boolean(data.get('publishDate') && data.get('featuredImage') && data.get('description'));
+
+            if (!isBlogPost) {
+              return data;
+            }
+
+            var allowEmptyBody = data.get('allowEmptyBody') === true;
+            var body = String(data.get('body') || '')
+              .replace(/<[^>]*>/g, '')
+              .replace(/&nbsp;/g, ' ')
+              .trim();
+
+            if (!allowEmptyBody && body.length === 0) {
+              throw new Error('The blog body is empty, so this save was blocked to protect your article. If you really want an empty post, turn on "Allow Empty Body" first.');
+            }
+
+            return data.delete('allowEmptyBody');
+          }
         });
 
         cms.init();

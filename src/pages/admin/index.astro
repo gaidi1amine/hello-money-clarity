@@ -129,6 +129,35 @@
           toPreview: buttonToPreview
         });
 
+        cms.registerEventListener({
+          name: 'preSave',
+          handler: function({ entry }) {
+            var data = entry.get('data');
+            var path = entry.get('path') || '';
+            var collection = entry.get('collection') || '';
+            var isBlogPost =
+              collection === 'blog' ||
+              path.indexOf('src/content/blog/') === 0 ||
+              Boolean(data.get('publishDate') && data.get('featuredImage') && data.get('description'));
+
+            if (!isBlogPost) {
+              return data;
+            }
+
+            var allowEmptyBody = data.get('allowEmptyBody') === true;
+            var body = String(data.get('body') || '')
+              .replace(/<[^>]*>/g, '')
+              .replace(/&nbsp;/g, ' ')
+              .trim();
+
+            if (!allowEmptyBody && body.length === 0) {
+              throw new Error('The blog body is empty, so this save was blocked to protect your article. If you really want an empty post, turn on "Allow Empty Body" first.');
+            }
+
+            return data.delete('allowEmptyBody');
+          }
+        });
+
         cms.init();
         window.syncAdminLoginState();
       };

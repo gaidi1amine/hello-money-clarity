@@ -44,9 +44,10 @@ collections:
       - { label: Categories/Tags, name: tags, widget: list, required: false, field: { label: Tag, name: tag, widget: string } }
       - { label: SEO Meta Description, name: metaDescription, widget: text, required: false }
       - { label: Social Share Image, name: socialImage, widget: image, required: false }
+      - { label: Allow Empty Body, name: allowEmptyBody, widget: boolean, default: false, required: false, hint: "Only turn this on if you intentionally want to save a post with no body." }
       - label: Body
         name: body
-        widget: markdown
+        widget: richtext
         required: false
         buttons: [bold, italic, heading-one, heading-two, heading-three, heading-four, quote, bulleted-list, numbered-list, link]
         editor_components: [image, cta-button]
@@ -69,7 +70,7 @@ collections:
             field: { label: Blog Post Slug, name: slug, widget: string }
           - label: Brand Intro Strip
             name: body
-            widget: markdown
+            widget: richtext
             buttons: [bold, italic, link]
             editor_components: [button-link]
 
@@ -80,7 +81,7 @@ collections:
           - { label: Page Title, name: title, widget: string }
           - label: Body
             name: body
-            widget: markdown
+            widget: richtext
             buttons: [bold, italic, heading-two, heading-three, quote, bulleted-list, numbered-list, link]
             editor_components: [button-link]
 
@@ -91,7 +92,7 @@ collections:
           - { label: Page Title, name: title, widget: string }
           - label: Body
             name: body
-            widget: markdown
+            widget: richtext
             buttons: [bold, italic, heading-two, heading-three, quote, bulleted-list, numbered-list, link]
             editor_components: [button-link]
 

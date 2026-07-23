@@ -16,7 +16,8 @@ const blog = defineCollection({
       metaDescription: z.string().optional(),
       socialImage: image().optional(),
       author: z.string().default('Hello Money Clarity'),
-      draft: z.boolean().default(false)
+      draft: z.boolean().default(false),
+      allowEmptyBody: z.boolean().optional()
     })
 });
 
