@@ -4,3 +4,10 @@ dist/
 .npm-cache/
 work/
 .git.invalid-backup*/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
