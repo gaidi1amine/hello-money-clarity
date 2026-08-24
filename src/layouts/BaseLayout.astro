@@ -10,8 +10,13 @@ interface Props {
 }
 
 const site = await getEntry('settings', 'site');
-const siteTitle = site?.data.title ?? 'Hello Money Clarity';
-const siteDescription = site?.data.description ?? 'Simple, honest tools for debt payoff and financial clarity.';
+const cleanMetaContent = (value: unknown, fallback: string) => {
+  const text = String(value ?? '').replace(/\s+/g, ' ').trim();
+  return text || fallback;
+};
+
+const siteTitle = cleanMetaContent(site?.data.title, 'Hello Money Clarity');
+const siteDescription = cleanMetaContent(site?.data.description, 'Simple, honest tools for debt payoff and financial clarity.');
 const footerLinks = site?.data.footerLinks ?? [
   { label: 'About', href: '/about' },
   { label: 'Blog', href: '/blog' },
@@ -19,8 +24,10 @@ const footerLinks = site?.data.footerLinks ?? [
 ];
 const contactEmail = site?.data.contactEmail ?? 'HelloMoneyClarity@gmail.com';
 const pinterestUrl = site?.data.pinterestUrl ?? '#';
-const pageTitle = Astro.props.title ? `${Astro.props.title} | ${siteTitle}` : siteTitle;
-const description = Astro.props.description ?? siteDescription;
+const title = cleanMetaContent(Astro.props.title, siteTitle);
+const pageTitle = Astro.props.title ? `${title} | ${siteTitle}` : siteTitle;
+const description = cleanMetaContent(Astro.props.description, siteDescription);
+const ogTitle = Astro.props.title ? title : siteTitle;
 const ogType = Astro.props.ogType ?? 'website';
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
 const ogImage = Astro.props.image ? new URL(Astro.props.image, Astro.site ?? Astro.url.origin) : undefined;
@@ -38,7 +45,7 @@ const ogImage = Astro.props.image ? new URL(Astro.props.image, Astro.site ?? Ast
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta property="og:type" content={ogType} />
-    <meta property="og:title" content={pageTitle} />
+    <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     {ogImage && <meta property="og:image" content={ogImage} />}
