@@ -11,8 +11,8 @@ backend:
   auth_token_endpoint: /sites/5040a8d3-a6ca-4aed-927c-41c551e441dc/token
   gateway_url: https://gateway.decapbridge.com
 
-site_url: https://hello-money-clarity.pages.dev
-display_url: https://hello-money-clarity.pages.dev
+site_url: https://moneyclarity.online
+display_url: https://moneyclarity.online
 logo_url: /favicon.svg
 
 media_folder: src/assets/blog

@@ -5579,7 +5579,7 @@ import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 
 export default defineConfig({
-  site: 'https://hello-money-clarity.pages.dev',
+  site: 'https://moneyclarity.online',
   output: 'static',
   trailingSlash: 'ignore',
   devToolbar: {
@@ -5679,11 +5679,11 @@ The posts are seeded editorial content for the Hello Money Clarity niche. They r
 
 ## 19. Current Deployment Status
 
-Configured Pages URL in astro.config.mjs and public/admin/config.yml: https://hello-money-clarity.pages.dev
-Reachability check from this workspace on 2026-07-06: failed DNS resolution (`The remote name could not be resolved: 'hello-money-clarity.pages.dev'`).
+Configured site URL in astro.config.mjs and public/admin/config.yml: https://moneyclarity.online
+Reachability check from this workspace on 2026-07-06: the previous Pages URL failed DNS resolution (`The remote name could not be resolved: 'hello-money-clarity.pages.dev'`).
 Current deployment status from local evidence: no successful live Cloudflare Pages deployment can be confirmed from this workspace.
 Most recent deploy success/failure: unknown from this workspace because no Cloudflare deployment metadata or authenticated Cloudflare access is present.
-Custom domain: no custom domain is configured in repository files; DNS verification status is unknown/pending from local evidence.
+Custom domain: `https://moneyclarity.online` is configured in repository files; DNS verification status is unknown/pending from local evidence.
 
 ## 20. Git Status
 
@@ -5696,7 +5696,7 @@ Last 5 commit messages at snapshot time:
 
 ## 21. Custom Domain And DNS Status
 
-No custom domain is present in local project config. The only configured site/display URL is `https://hello-money-clarity.pages.dev`. DNS/custom-domain verification cannot be confirmed from this workspace and appears not configured locally.
+Custom domain configured in local project config: `https://moneyclarity.online`. DNS/custom-domain verification cannot be confirmed from this workspace.
 
 ## 4. Layout Files And Component Files
 
@@ -5710,6 +5710,7 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  ogType?: 'website' | 'article';
 }
 
 const site = await getEntry('settings', 'site');
@@ -5724,6 +5725,7 @@ const contactEmail = site?.data.contactEmail ?? 'HelloMoneyClarity@gmail.com';
 const pinterestUrl = site?.data.pinterestUrl ?? '#';
 const pageTitle = Astro.props.title ? `${Astro.props.title} | ${siteTitle}` : siteTitle;
 const description = Astro.props.description ?? siteDescription;
+const ogType = Astro.props.ogType ?? 'website';
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
 const ogImage = Astro.props.image ? new URL(Astro.props.image, Astro.site ?? Astro.url.origin) : undefined;
 ---
@@ -5734,15 +5736,17 @@ const ogImage = Astro.props.image ? new URL(Astro.props.image, Astro.site ?? Ast
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="p:domain_verify" content="c28ce2b9343dd1d0e56799ee5bf87971" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta property="og:site_name" content={siteTitle} />
     <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
   </head>
   <body>
@@ -6118,7 +6122,7 @@ const description = post.data.metaDescription ?? post.data.description;
 const image = post.data.socialImage?.src ?? post.data.featuredImage.src;
 ---
 
-<BaseLayout title={post.data.title} description={description} image={image}>
+<BaseLayout title={post.data.title} description={description} image={image} ogType="article">
   <article class="post-page">
     <header class="container post-hero">
       <div class="post-kicker">{post.data.author} / {readTime}</div>
@@ -6361,8 +6365,8 @@ backend:
   auth_token_endpoint: /sites/5040a8d3-a6ca-4aed-927c-41c551e441dc/token
   gateway_url: https://gateway.decapbridge.com
 
-site_url: https://hello-money-clarity.pages.dev
-display_url: https://hello-money-clarity.pages.dev
+site_url: https://moneyclarity.online
+display_url: https://moneyclarity.online
 logo_url: /favicon.svg
 
 media_folder: src/assets/blog
@@ -6676,7 +6680,7 @@ Current token values actually implemented include:
 
 - Production Decap CMS authentication now has DecapBridge/Git Gateway values configured, but the deployed login flow is not yet verified from this workspace.
 - Decap `publish_mode: editorial_workflow` has been removed so saves go directly through the configured backend instead of hidden draft branches.
-- `hello-money-clarity.pages.dev` did not resolve during the current check, so the live site may not be deployed, may have a different Pages URL, or DNS may not be ready.
+- `https://moneyclarity.online` is now configured as the project site URL locally, but DNS/custom-domain verification is not confirmed from this workspace.
 - No Cloudflare-specific headers or redirects are configured.
 - Git metadata is unusable from this workspace despite a `.git` folder being present.
 

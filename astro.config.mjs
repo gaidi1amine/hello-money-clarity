@@ -3,7 +3,7 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://hello-money-clarity.pages.dev',
+  site: 'https://moneyclarity.online',
   output: 'static',
   trailingSlash: 'ignore',
   devToolbar: {

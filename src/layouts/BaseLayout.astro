@@ -6,6 +6,7 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  ogType?: 'website' | 'article';
 }
 
 const site = await getEntry('settings', 'site');
@@ -20,6 +21,7 @@ const contactEmail = site?.data.contactEmail ?? 'HelloMoneyClarity@gmail.com';
 const pinterestUrl = site?.data.pinterestUrl ?? '#';
 const pageTitle = Astro.props.title ? `${Astro.props.title} | ${siteTitle}` : siteTitle;
 const description = Astro.props.description ?? siteDescription;
+const ogType = Astro.props.ogType ?? 'website';
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
 const ogImage = Astro.props.image ? new URL(Astro.props.image, Astro.site ?? Astro.url.origin) : undefined;
 ---
@@ -30,15 +32,17 @@ const ogImage = Astro.props.image ? new URL(Astro.props.image, Astro.site ?? Ast
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="p:domain_verify" content="c28ce2b9343dd1d0e56799ee5bf87971" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta property="og:site_name" content={siteTitle} />
     <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
   </head>
   <body>

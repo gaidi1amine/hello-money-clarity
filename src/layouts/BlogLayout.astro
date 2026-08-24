@@ -17,7 +17,7 @@ const description = post.data.metaDescription ?? post.data.description;
 const image = post.data.socialImage?.src ?? post.data.featuredImage.src;
 ---
 
-<BaseLayout title={post.data.title} description={description} image={image}>
+<BaseLayout title={post.data.title} description={description} image={image} ogType="article">
   <article class="post-page">
     <header class="container post-hero">
       <div class="post-kicker">{post.data.author} / {readTime}</div>
