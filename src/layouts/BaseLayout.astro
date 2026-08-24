@@ -7,6 +7,7 @@ interface Props {
   description?: string;
   image?: string;
   ogType?: 'website' | 'article';
+  disableDefaultOg?: boolean;
 }
 
 const site = await getEntry('settings', 'site');
@@ -31,10 +32,11 @@ const ogTitle = Astro.props.title ? title : siteTitle;
 const ogType = Astro.props.ogType ?? 'website';
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
 const ogImage = Astro.props.image ? new URL(Astro.props.image, Astro.site ?? Astro.url.origin) : undefined;
+const renderDefaultOg = !Astro.props.disableDefaultOg;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns# article: https://ogp.me/ns/article#">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -44,12 +46,17 @@ const ogImage = Astro.props.image ? new URL(Astro.props.image, Astro.site ?? Ast
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta property="og:type" content={ogType} />
-    <meta property="og:title" content={ogTitle} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
-    {ogImage && <meta property="og:image" content={ogImage} />}
-    <meta property="og:site_name" content={siteTitle} />
+    {renderDefaultOg && (
+      <Fragment>
+        <meta property="og:type" content={ogType} />
+        <meta property="og:title" content={ogTitle} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={canonical} />
+        {ogImage && <meta property="og:image" content={ogImage} />}
+        <meta property="og:site_name" content={siteTitle} />
+      </Fragment>
+    )}
+    <slot name="head" />
     <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
   </head>
   <body>

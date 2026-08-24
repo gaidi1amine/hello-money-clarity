@@ -12,12 +12,35 @@ interface Props {
 
 const { post, Content, readTime } = Astro.props;
 const site = await getEntry('settings', 'site');
+const cleanMetaContent = (value: unknown, fallback: string) => {
+  const text = String(value ?? '').replace(/\s+/g, ' ').trim();
+  return text || fallback;
+};
+
+const siteTitle = cleanMetaContent(site?.data.title, 'Hello Money Clarity');
+const title = cleanMetaContent(post.data.title, siteTitle);
 const disclaimer = site?.data.affiliateDisclaimer;
-const description = post.data.metaDescription ?? post.data.description;
+const description = cleanMetaContent(
+  post.data.metaDescription ?? post.data.description,
+  'Simple, honest tools for debt payoff and financial clarity.'
+);
 const image = post.data.socialImage?.src ?? post.data.featuredImage.src;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).href;
+const ogImage = new URL(image, Astro.site ?? Astro.url.origin).href;
+const author = cleanMetaContent(post.data.author, siteTitle);
 ---
 
-<BaseLayout title={post.data.title} description={description} image={image} ogType="article">
+<BaseLayout title={title} description={description} image={image} ogType="article" disableDefaultOg>
+  <Fragment slot="head">
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content={siteTitle} />
+    <meta property="article:published_time" content={post.data.publishDate.toISOString()} />
+    <meta property="article:author" content={author} />
+  </Fragment>
   <article class="post-page">
     <header class="container post-hero">
       <div class="post-kicker">{post.data.author} / {readTime}</div>
