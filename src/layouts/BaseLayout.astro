@@ -31,7 +31,7 @@ const description = cleanMetaContent(Astro.props.description, siteDescription);
 const ogTitle = Astro.props.title ? title : siteTitle;
 const ogType = Astro.props.ogType ?? 'website';
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
-const ogImage = Astro.props.image ? new URL(Astro.props.image, Astro.site ?? Astro.url.origin) : undefined;
+const ogImage = new URL(Astro.props.image ?? '/social-card.jpeg', Astro.site ?? Astro.url.origin);
 const renderDefaultOg = !Astro.props.disableDefaultOg;
 ---
 
@@ -57,7 +57,7 @@ const renderDefaultOg = !Astro.props.disableDefaultOg;
       </Fragment>
     )}
     <slot name="head" />
-    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
