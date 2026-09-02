@@ -1,7 +1,7 @@
 ---
 title: Hello, we're glad you're here.
 ---
-Hello Money Clarity started with a simple frustration: most financial advice online is either too vague to act on, or too aggressive about selling you something you don't need.
+Anchor Money started with a simple frustration: most financial advice online is either too vague to act on, or too aggressive about selling you something you don't need.
 
 We wanted something different - content that treats you like a capable adult who's dealing with a real, stressful problem, and tools that actually help you solve it.
 

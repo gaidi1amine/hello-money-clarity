@@ -1,4 +1,4 @@
-﻿# PROJECT_STATE
+# PROJECT_STATE
 
 Generated on 2026-07-06 from the local workspace at `C:\Users\gaidi\Documents\Codex\2026-07-05\files-mentioned-by-the-user-1`.
 
@@ -9,14 +9,14 @@ Generated on 2026-07-06 from the local workspace at `C:\Users\gaidi\Documents\Co
 - Node version used in this workspace: v24.12.0
 - npm dependency check output:
 ````text
-hello-money-clarity@0.1.0 C:\Users\gaidi\Documents\Codex\2026-07-05\files-mentioned-by-the-user-1
+anchor-money@0.1.0 C:\Users\gaidi\Documents\Codex\2026-07-05\files-mentioned-by-the-user-1
 `-- astro@5.18.2
 ````
 
 ### package.json
 ````json
 {
-  "name": "hello-money-clarity",
+  "name": "anchor-money",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -5328,14 +5328,14 @@ const { Content: HomeIntro } = await home!.render();
       <div class="prose">
         <HomeIntro />
       </div>
-      <a href="/about">About Hello Money Clarity</a>
+      <a href="/about">About Anchor Money</a>
     </div>
   </section>
 </BaseLayout>
 
 <style>
   .hero {
-    background: var(--color-teal);
+    background: var(--color-charcoal);
     color: var(--color-white);
   }
 
@@ -5397,7 +5397,7 @@ const about = await getEntry('settings', 'about');
 const { Content } = await about!.render();
 ---
 
-<BaseLayout title="About" description="Learn why Hello Money Clarity exists and what readers can expect from the site.">
+<BaseLayout title="About" description="Learn why Anchor Money exists and what readers can expect from the site.">
   <section class="section page-header">
     <div class="container">
       <h1>{about?.data.title}</h1>
@@ -5436,7 +5436,7 @@ const pinterestUrl = site?.data.pinterestUrl ?? '#';
 const { Content } = await contact!.render();
 ---
 
-<BaseLayout title="Contact" description="Contact Hello Money Clarity by email.">
+<BaseLayout title="Contact" description="Contact Anchor Money by email.">
   <section class="section contact-page">
     <div class="container contact-inner">
       <h1>{contact?.data.title ?? 'Contact'}</h1>
@@ -5490,7 +5490,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 );
 ---
 
-<BaseLayout title="Blog" description="Debt payoff, budgeting, and money clarity guides from Hello Money Clarity.">
+<BaseLayout title="Blog" description="Debt payoff, budgeting, and money clarity guides from Anchor Money.">
   <section class="section blog-index">
     <div class="container">
       <div class="section-header">
@@ -5675,7 +5675,7 @@ Current blog post count: 3
 - src/content/blog/make-a-budget-that-survives-real-life.mdx
 - src/content/blog/track-debt-payoff-progress.mdx
 
-The posts are seeded editorial content for the Hello Money Clarity niche. They read like real first-draft site content, but from project context they should be treated as starter/sample content until the owner confirms they are final production posts.
+The posts are seeded editorial content for the Anchor Money niche. They read like real first-draft site content, but from project context they should be treated as starter/sample content until the owner confirms they are final production posts.
 
 ## 19. Current Deployment Status
 
@@ -5691,7 +5691,7 @@ Git repository initialized locally for `https://github.com/gaidi1amine/hello-mon
 
 Last 5 commit messages at snapshot time:
 - `be25894 Merge remote starter commit`
-- `8f6a744 Initial Hello Money Clarity site`
+- `8f6a744 Initial Anchor Money site`
 - `7befc90 Initial commit`
 
 ## 21. Custom Domain And DNS Status
@@ -5719,7 +5719,7 @@ const cleanMetaContent = (value: unknown, fallback: string) => {
   return text || fallback;
 };
 
-const siteTitle = cleanMetaContent(site?.data.title, 'Hello Money Clarity');
+const siteTitle = cleanMetaContent(site?.data.title, 'Anchor Money');
 const siteDescription = cleanMetaContent(site?.data.description, 'Simple, honest tools for debt payoff and financial clarity.');
 const footerLinks = site?.data.footerLinks ?? [
   { label: 'About', href: '/about' },
@@ -5786,7 +5786,7 @@ const ogImage = Astro.props.image ? new URL(Astro.props.image, Astro.site ?? Ast
         </div>
       </div>
       <div class="container footer-bottom">
-        <p>(c) {new Date().getFullYear()} Hello Money Clarity. All rights reserved.</p>
+        <p>(c) {new Date().getFullYear()} Anchor Money. All rights reserved.</p>
       </div>
     </footer>
   </body>
@@ -5794,13 +5794,13 @@ const ogImage = Astro.props.image ? new URL(Astro.props.image, Astro.site ?? Ast
 
 <style is:global>
   :root {
-    --color-teal: #0f4c4c;
-    --color-gold: #d4a93c;
+    --color-charcoal: #2f3432;
+    --color-sage: #7d9c8b;
     --color-white: #ffffff;
     --color-soft: #f7f9f7;
-    --color-line: rgba(15, 76, 76, 0.14);
-    --color-muted: rgba(15, 76, 76, 0.72);
-    --shadow-soft: 0 14px 40px rgba(15, 76, 76, 0.08);
+    --color-line: rgba(47, 52, 50, 0.14);
+    --color-muted: rgba(47, 52, 50, 0.72);
+    --shadow-soft: 0 14px 40px rgba(47, 52, 50, 0.08);
     --radius: 8px;
     color-scheme: light;
   }
@@ -5811,7 +5811,7 @@ const ogImage = Astro.props.image ? new URL(Astro.props.image, Astro.site ?? Ast
 
   html {
     font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    color: var(--color-teal);
+    color: var(--color-charcoal);
     background: var(--color-white);
     line-height: 1.5;
     text-rendering: optimizeLegibility;
@@ -5830,13 +5830,13 @@ const ogImage = Astro.props.image ? new URL(Astro.props.image, Astro.site ?? Ast
 
   a {
     color: inherit;
-    text-decoration-color: var(--color-gold);
+    text-decoration-color: var(--color-sage);
     text-decoration-thickness: 2px;
     text-underline-offset: 0.18em;
   }
 
   a:hover {
-    color: #0b3939;
+    color: #516f61;
   }
 
   p,
@@ -5852,7 +5852,7 @@ const ogImage = Astro.props.image ? new URL(Astro.props.image, Astro.site ?? Ast
     margin: 0;
     line-height: 1.12;
     letter-spacing: 0;
-    color: var(--color-teal);
+    color: var(--color-charcoal);
   }
 
   h1 {
@@ -5878,7 +5878,7 @@ const ogImage = Astro.props.image ? new URL(Astro.props.image, Astro.site ?? Ast
     top: 12px;
     z-index: 20;
     transform: translateY(-140%);
-    background: var(--color-teal);
+    background: var(--color-charcoal);
     color: var(--color-white);
     padding: 0.6rem 0.8rem;
     border-radius: var(--radius);
@@ -5906,7 +5906,7 @@ const ogImage = Astro.props.image ? new URL(Astro.props.image, Astro.site ?? Ast
     align-items: center;
     gap: 0.7rem;
     min-width: 0;
-    color: var(--color-teal);
+    color: var(--color-charcoal);
     text-decoration: none;
     font-weight: 800;
   }
@@ -5924,11 +5924,11 @@ const ogImage = Astro.props.image ? new URL(Astro.props.image, Astro.site ?? Ast
   }
 
   .logo-wordmark span {
-    color: var(--color-gold);
+    color: var(--color-sage);
   }
 
   .logo-wordmark strong {
-    color: var(--color-teal);
+    color: var(--color-charcoal);
   }
 
   .primary-nav,
@@ -5956,17 +5956,17 @@ const ogImage = Astro.props.image ? new URL(Astro.props.image, Astro.site ?? Ast
     min-height: 46px;
     padding: 0.75rem 1.1rem;
     border-radius: var(--radius);
-    background: var(--color-gold);
-    color: #123737;
+    background: var(--color-sage);
+    color: #2F3432;
     font-weight: 800;
     text-decoration: none;
-    box-shadow: 0 8px 20px rgba(212, 169, 60, 0.22);
+    box-shadow: 0 8px 20px rgba(125, 156, 139, 0.22);
   }
 
   .button:hover,
   .cta-button:hover,
   .button-link:hover {
-    color: #123737;
+    color: #2F3432;
     transform: translateY(-1px);
   }
 
@@ -6004,18 +6004,18 @@ const ogImage = Astro.props.image ? new URL(Astro.props.image, Astro.site ?? Ast
   }
 
   .post-meta {
-    color: rgba(15, 76, 76, 0.64);
+    color: rgba(47, 52, 50, 0.64);
     font-size: 0.92rem;
     font-weight: 700;
   }
 
   .read-more {
-    color: var(--color-teal);
+    color: var(--color-charcoal);
     font-weight: 800;
   }
 
   .site-footer {
-    background: var(--color-teal);
+    background: var(--color-charcoal);
     color: var(--color-white);
     padding-block: 2rem 1rem;
   }
@@ -6028,7 +6028,7 @@ const ogImage = Astro.props.image ? new URL(Astro.props.image, Astro.site ?? Ast
   }
 
   .site-footer .logo-wordmark span {
-    color: var(--color-gold);
+    color: var(--color-sage);
   }
 
   .footer-grid {
@@ -6068,7 +6068,7 @@ const ogImage = Astro.props.image ? new URL(Astro.props.image, Astro.site ?? Ast
   .prose blockquote {
     margin-inline: 0;
     padding: 1rem;
-    border-left: 4px solid var(--color-gold);
+    border-left: 4px solid var(--color-sage);
     background: var(--color-soft);
     border-radius: 0 var(--radius) var(--radius) 0;
   }
@@ -6167,7 +6167,7 @@ const image = post.data.socialImage?.src ?? post.data.featuredImage.src;
   }
 
   .post-kicker {
-    color: var(--color-gold);
+    color: var(--color-sage);
     font-size: 0.92rem;
     font-weight: 800;
     text-transform: uppercase;
@@ -6189,9 +6189,9 @@ const image = post.data.socialImage?.src ?? post.data.featuredImage.src;
   .affiliate-note {
     width: min(100%, 760px);
     padding: 0.9rem 1rem;
-    border: 1px solid rgba(212, 169, 60, 0.42);
+    border: 1px solid rgba(125, 156, 139, 0.42);
     border-radius: var(--radius);
-    background: #fffaf0;
+    background: #eef4ee;
     color: var(--color-muted);
     font-size: 0.95rem;
   }
@@ -6208,16 +6208,16 @@ interface Props {
 const { compact = false } = Astro.props;
 ---
 
-<a class="logo" href="/" aria-label="Hello Money Clarity home">
+<a class="logo" href="/" aria-label="Anchor Money home">
   <svg class="logo-mark" viewBox="0 0 64 64" role="img" aria-hidden="true">
-    <rect width="64" height="64" rx="14" fill="#0F4C4C"></rect>
+    <rect width="64" height="64" rx="14" fill="#7D9C8B"></rect>
     <path d="M18 34c0-8 5-14 13-14 5 0 9 2 12 6l-6 5c-2-3-4-4-7-4-4 0-7 3-7 7s3 7 7 7c4 0 8-3 15-13l6 4c-8 12-14 17-22 17-7 0-11-5-11-15z" fill="#FFFFFF"></path>
-    <path d="M27 35l7 7 14-18" fill="none" stroke="#D4A93C" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
+    <path d="M27 35l7 7 14-18" fill="none" stroke="#2F3432" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
   </svg>
   {!compact && (
     <span class="logo-wordmark" aria-hidden="true">
       <span>Hello</span>
-      <strong>Money Clarity</strong>
+      <strong>Anchor Money</strong>
     </span>
   )}
 </a>
@@ -6259,7 +6259,7 @@ const blog = defineCollection({
       tags: z.array(z.string()).default([]),
       metaDescription: z.string().optional(),
       socialImage: image().optional(),
-      author: z.string().default('Hello Money Clarity'),
+      author: z.string().default('Anchor Money'),
       draft: z.boolean().default(false),
       allowEmptyBody: z.boolean().optional()
     })
@@ -6293,7 +6293,7 @@ export const collections = { blog, settings };
 ---
 title: Hello, we're glad you're here.
 ---
-Hello Money Clarity started with a simple frustration: most financial advice online is either too vague to act on, or too aggressive about selling you something you don't need.
+Anchor Money started with a simple frustration: most financial advice online is either too vague to act on, or too aggressive about selling you something you don't need.
 
 We wanted something different - content that treats you like a capable adult who's dealing with a real, stressful problem, and tools that actually help you solve it.
 
@@ -6331,13 +6331,13 @@ featuredPosts:
   - track-debt-payoff-progress
 ---
 
-Hello Money Clarity is built for anyone who's tired of financial advice that talks down to them or oversells a "hack." We break down debt payoff and money management into steps that actually make sense - plus tools you can use today, not someday.
+Anchor Money is built for anyone who's tired of financial advice that talks down to them or oversells a "hack." We break down debt payoff and money management into steps that actually make sense - plus tools you can use today, not someday.
 ````
 
 ### src/content/settings/site.md
 ````md
 ---
-title: "Hello Money Clarity"
+title: "Anchor Money"
 description: "Simple, honest tools to help you understand your money, get out of debt, and stop feeling overwhelmed by your finances."
 contactEmail: "HelloMoneyClarity@gmail.com"
 pinterestUrl: "#"
@@ -6492,7 +6492,7 @@ Note: the admin UI is implemented as `src/pages/admin/index.astro`, not `public/
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
     <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
-    <title>Hello Money Clarity Admin</title>
+    <title>Anchor Money Admin</title>
     <style is:inline>
       html,
       body {
@@ -6584,7 +6584,7 @@ Note: the admin UI is implemented as `src/pages/admin/index.astro`, not `public/
 
         function buttonToPreview(data) {
           var text = escapeHtml(data.text || 'Button');
-          return '<a style="display:inline-block;padding:12px 18px;border-radius:8px;background:#D4A93C;color:#123737;font-weight:800;text-decoration:none;">' + text + '</a>';
+          return '<a style="display:inline-block;padding:12px 18px;border-radius:8px;background:#2F3432;color:#2F3432;font-weight:800;text-decoration:none;">' + text + '</a>';
         }
 
         cms.registerEditorComponent({
@@ -6656,10 +6656,10 @@ Note: the admin UI is implemented as `src/pages/admin/index.astro`, not `public/
 There is no `src/styles/global.css`, no `global.css`, and no `tailwind.config.*` file in the current repository. Styling and design tokens are implemented inline in Astro `<style>` blocks. The full contents of all files containing those styles are included above in sections 3 and 4.
 
 Current token values actually implemented include:
-- `--color-teal: #0f4c4c`
-- `--color-teal-dark: #0a3838`
-- `--color-gold: #d4a93c`
-- `--color-gold-dark: #bd9028`
+- `--color-charcoal: #2f3432`
+- `--color-sage-dark: #516f61`
+- `--color-sage: #7d9c8b`
+- `--color-cream: #f4efe5`
 - `--color-cream: #fbfaf5`
 - `--color-ink: #173232`
 - `--color-muted: #5b6f6f`
@@ -6667,14 +6667,14 @@ Current token values actually implemented include:
 - `--font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`
 - `--content-width: 1120px`
 - `--radius: 8px`
-- `--shadow: 0 14px 36px rgba(15, 76, 76, 0.12)`
+- `--shadow: 0 14px 36px rgba(47, 52, 50, 0.12)`
 
 ## 8. Deviations From Original Spec
 
 - The original reference structure expected `public/admin/index.html`; this implementation uses `src/pages/admin/index.astro` for the admin page and loads the static Decap config from `/admin/config.yml`.
 - Admin authentication is configured for DecapBridge/Git Gateway in `public/admin/config.yml`, but live login still needs to be tested after deployment.
 - The original spec requested DecapBridge or GitHub OAuth invite-only auth. Local editing currently works through `local_backend` plus the Decap proxy, but production login remains incomplete.
-- The color palette request said not to introduce additional brand colors; the implementation uses teal/gold/white plus neutral support colors (`cream`, `ink`, `muted`, `border`) for readability and layout.
+- The color palette request said not to introduce additional brand colors; the implementation uses sage/cream/charcoal plus neutral support colors (`cream`, `ink`, `muted`, `border`) for readability and layout.
 - Sitemap support is configured with `@astrojs/sitemap`.
 - `public/robots.txt` is configured.
 - A custom 404 page exists at `src/pages/404.astro`.

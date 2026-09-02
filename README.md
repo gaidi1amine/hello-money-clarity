@@ -1,4 +1,4 @@
-# Hello Money Clarity
+# Anchor Money
 
 A fast, static Astro blog for a calm personal finance brand focused on debt payoff and financial clarity.
 

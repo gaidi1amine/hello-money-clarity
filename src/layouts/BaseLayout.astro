@@ -16,7 +16,7 @@ const cleanMetaContent = (value: unknown, fallback: string) => {
   return text || fallback;
 };
 
-const siteTitle = cleanMetaContent(site?.data.title, 'Hello Money Clarity');
+const siteTitle = cleanMetaContent(site?.data.title, 'Anchor Money');
 const siteDescription = cleanMetaContent(site?.data.description, 'Simple, honest tools for debt payoff and financial clarity.');
 const footerLinks = site?.data.footerLinks ?? [
   { label: 'About', href: '/about' },
@@ -89,7 +89,7 @@ const renderDefaultOg = !Astro.props.disableDefaultOg;
         </div>
       </div>
       <div class="container footer-bottom">
-        <p>(c) {new Date().getFullYear()} Hello Money Clarity. All rights reserved.</p>
+        <p>(c) {new Date().getFullYear()} Anchor Money. All rights reserved.</p>
       </div>
     </footer>
   </body>
@@ -97,13 +97,15 @@ const renderDefaultOg = !Astro.props.disableDefaultOg;
 
 <style is:global>
   :root {
-    --color-teal: #0f4c4c;
-    --color-gold: #d4a93c;
-    --color-white: #ffffff;
-    --color-soft: #f7f9f7;
-    --color-line: rgba(15, 76, 76, 0.14);
-    --color-muted: rgba(15, 76, 76, 0.72);
-    --shadow-soft: 0 14px 40px rgba(15, 76, 76, 0.08);
+    --color-charcoal: #2f3432;
+    --color-sage: #7d9c8b;
+    --color-sage-dark: #516f61;
+    --color-cream: #f4efe5;
+    --color-surface: #fff8ed;
+    --color-soft: #eef4ee;
+    --color-line: rgba(47, 52, 50, 0.14);
+    --color-muted: rgba(47, 52, 50, 0.72);
+    --shadow-soft: 0 14px 40px rgba(47, 52, 50, 0.08);
     --radius: 8px;
     color-scheme: light;
   }
@@ -114,8 +116,8 @@ const renderDefaultOg = !Astro.props.disableDefaultOg;
 
   html {
     font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    color: var(--color-teal);
-    background: var(--color-white);
+    color: var(--color-charcoal);
+    background: var(--color-cream);
     line-height: 1.5;
     text-rendering: optimizeLegibility;
   }
@@ -133,13 +135,13 @@ const renderDefaultOg = !Astro.props.disableDefaultOg;
 
   a {
     color: inherit;
-    text-decoration-color: var(--color-gold);
+    text-decoration-color: var(--color-sage);
     text-decoration-thickness: 2px;
     text-underline-offset: 0.18em;
   }
 
   a:hover {
-    color: #0b3939;
+    color: var(--color-sage-dark);
   }
 
   p,
@@ -155,7 +157,7 @@ const renderDefaultOg = !Astro.props.disableDefaultOg;
     margin: 0;
     line-height: 1.12;
     letter-spacing: 0;
-    color: var(--color-teal);
+    color: var(--color-charcoal);
   }
 
   h1 {
@@ -181,8 +183,8 @@ const renderDefaultOg = !Astro.props.disableDefaultOg;
     top: 12px;
     z-index: 20;
     transform: translateY(-140%);
-    background: var(--color-teal);
-    color: var(--color-white);
+    background: var(--color-charcoal);
+    color: var(--color-surface);
     padding: 0.6rem 0.8rem;
     border-radius: var(--radius);
   }
@@ -192,7 +194,7 @@ const renderDefaultOg = !Astro.props.disableDefaultOg;
   }
 
   .site-header {
-    background: var(--color-white);
+    background: var(--color-surface);
     border-bottom: 1px solid var(--color-line);
   }
 
@@ -209,7 +211,7 @@ const renderDefaultOg = !Astro.props.disableDefaultOg;
     align-items: center;
     gap: 0.7rem;
     min-width: 0;
-    color: var(--color-teal);
+    color: var(--color-charcoal);
     text-decoration: none;
     font-weight: 800;
   }
@@ -227,11 +229,11 @@ const renderDefaultOg = !Astro.props.disableDefaultOg;
   }
 
   .logo-wordmark span {
-    color: var(--color-gold);
+    color: var(--color-sage-dark);
   }
 
   .logo-wordmark strong {
-    color: var(--color-teal);
+    color: var(--color-charcoal);
   }
 
   .primary-nav,
@@ -259,17 +261,17 @@ const renderDefaultOg = !Astro.props.disableDefaultOg;
     min-height: 46px;
     padding: 0.75rem 1.1rem;
     border-radius: var(--radius);
-    background: var(--color-gold);
-    color: #123737;
+    background: var(--color-sage);
+    color: var(--color-charcoal);
     font-weight: 800;
     text-decoration: none;
-    box-shadow: 0 8px 20px rgba(212, 169, 60, 0.22);
+    box-shadow: 0 8px 20px rgba(125, 156, 139, 0.22);
   }
 
   .button:hover,
   .cta-button:hover,
   .button-link:hover {
-    color: #123737;
+    color: var(--color-charcoal);
     transform: translateY(-1px);
   }
 
@@ -292,7 +294,7 @@ const renderDefaultOg = !Astro.props.disableDefaultOg;
     border: 1px solid var(--color-line);
     border-radius: var(--radius);
     overflow: hidden;
-    background: var(--color-white);
+    background: var(--color-surface);
     box-shadow: var(--shadow-soft);
   }
 
@@ -320,19 +322,19 @@ const renderDefaultOg = !Astro.props.disableDefaultOg;
   }
 
   .post-meta {
-    color: rgba(15, 76, 76, 0.64);
+    color: rgba(47, 52, 50, 0.64);
     font-size: 0.92rem;
     font-weight: 700;
   }
 
   .read-more {
-    color: var(--color-teal);
+    color: var(--color-charcoal);
     font-weight: 800;
   }
 
   .site-footer {
-    background: var(--color-teal);
-    color: var(--color-white);
+    background: #e6eee7;
+    color: var(--color-charcoal);
     padding-block: 2rem 1rem;
   }
 
@@ -340,11 +342,11 @@ const renderDefaultOg = !Astro.props.disableDefaultOg;
   .site-footer .logo,
   .site-footer a,
   .site-footer p {
-    color: var(--color-white);
+    color: var(--color-charcoal);
   }
 
   .site-footer .logo-wordmark span {
-    color: var(--color-gold);
+    color: var(--color-sage-dark);
   }
 
   .footer-grid {
@@ -360,7 +362,7 @@ const renderDefaultOg = !Astro.props.disableDefaultOg;
   .footer-brand p,
   .footer-bottom p {
     margin: 0;
-    color: rgba(255, 255, 255, 0.82);
+    color: var(--color-muted);
   }
 
   .footer-bottom {
@@ -384,7 +386,7 @@ const renderDefaultOg = !Astro.props.disableDefaultOg;
   .prose blockquote {
     margin-inline: 0;
     padding: 1rem;
-    border-left: 4px solid var(--color-gold);
+    border-left: 4px solid var(--color-sage);
     background: var(--color-soft);
     border-radius: 0 var(--radius) var(--radius) 0;
   }

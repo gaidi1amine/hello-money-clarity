@@ -9,4 +9,4 @@ featuredPosts:
   - track-debt-payoff-progress
 ---
 
-Hello Money Clarity is built for anyone who's tired of financial advice that talks down to them or oversells a "hack." We break down debt payoff and money management into steps that actually make sense - plus tools you can use today, not someday.
+Anchor Money is built for anyone who's tired of financial advice that talks down to them or oversells a "hack." We break down debt payoff and money management into steps that actually make sense - plus tools you can use today, not someday.

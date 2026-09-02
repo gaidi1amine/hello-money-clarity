@@ -15,7 +15,7 @@ const blog = defineCollection({
       tags: z.array(z.string()).default([]),
       metaDescription: z.string().optional(),
       socialImage: image().optional(),
-      author: z.string().default('Hello Money Clarity'),
+      author: z.string().default('Anchor Money'),
       draft: z.boolean().default(false),
       allowEmptyBody: z.boolean().optional()
     })

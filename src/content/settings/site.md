@@ -1,5 +1,5 @@
 ---
-title: Hello Money Clarity
+title: Anchor Money
 description: Simple, honest tools to help you understand your money, get out of
   debt, and stop feeling overwhelmed by your finances.
 contactEmail: HelloMoneyClarity@gmail.com
